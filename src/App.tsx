@@ -85,8 +85,8 @@ export default function App() {
 
       <main className="flex-grow flex flex-col items-center justify-center px-6 text-center">
         <div className="flex flex-col sm:flex-row items-center sm:space-x-4 mb-6">
-          <div className="w-16 h-16 bg-black dark:bg-white rounded-full flex-shrink-0 flex items-center justify-center">
-            <div className="w-4 h-4 bg-white dark:bg-black rounded-full"></div>
+          <div className="w-16 h-16 bg-black rounded-full flex-shrink-0 flex items-center justify-center">
+            <div className="w-4 h-4 bg-white rounded-full"></div>
           </div>
           <div className="mt-4 sm:mt-0">
             <h1 className="text-2xl sm:text-4xl font-bold">
