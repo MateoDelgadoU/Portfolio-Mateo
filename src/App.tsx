@@ -78,18 +78,18 @@ export default function App() {
       className={`min-h-screen text-lg font-mono flex flex-col justify-between transition-colors duration-500 animate-fadeIn
       ${theme === "dark"
           ? "bg-[#0a0a0a] text-[#e0e0e0] bg-[radial-gradient(#ffffff0d_1px,transparent_1px)] bg-[size:10px_10px]"
-          : "bg-[#fdfdfd] text-[#2c2c2c] bg-[radial-gradient(#0000000d_1px,transparent_1px)] bg-[size:10px_10px]"
+          : "bg-[#ffffff] text-[#222222] bg-[radial-gradient(#0000000d_1px,transparent_1px)] bg-[size:10px_10px]"
         }`}
     >
       <Header toggleTheme={toggleTheme} theme={theme} />
 
       <main className="flex-grow flex flex-col items-center justify-center px-6 text-center">
         <div className="flex flex-col sm:flex-row items-center sm:space-x-4 mb-6">
-          <div className="w-16 h-16 bg-black rounded-full flex-shrink-0 flex items-center justify-center">
-            <div className="w-4 h-4 bg-white rounded-full"></div>
+          <div className="w-20 h-20 bg-black rounded-full flex-shrink-0 flex items-center justify-center">
+            <div className="w-5 h-5 bg-white rounded-full"></div>
           </div>
           <div className="mt-4 sm:mt-0">
-            <h1 className="text-2xl sm:text-4xl font-bold">
+            <h1 className="text-2xl sm:text-4xl font-bold mb-2">
               Mateo Miguel Delgado Ugarte
             </h1>
             <p className="text-base sm:text-xl">Software Developer</p>
@@ -115,7 +115,7 @@ export default function App() {
           developers.
         </p>
         <p className="leading-relaxed max-w-xl">
-          Connect with me through my social networks or explore my projects.
+          Connect with me through my social networks or explore my projects  on my GitHub profile.
         </p>
       </main>
 
