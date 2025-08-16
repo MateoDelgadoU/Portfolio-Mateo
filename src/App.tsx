@@ -115,7 +115,7 @@ export default function App() {
           developers.
         </p>
         <p className="leading-relaxed max-w-xl">
-          Connect with me through my social networks or explore my projects  on my GitHub profile.
+          Feel free to connect with me through my social networks, or check out my projects on GitHub.
         </p>
       </main>
 
