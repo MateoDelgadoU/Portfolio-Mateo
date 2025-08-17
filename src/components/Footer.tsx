@@ -12,7 +12,7 @@ export default function Footer() {
                 <Icons.Mail className="h-6 w-6 text-red-500" />
             </a>
             <a
-                href="https://github.com/Matt-Py-GH"
+                href="https://github.com/MateoDelgadoU"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={buttonsStyle}
