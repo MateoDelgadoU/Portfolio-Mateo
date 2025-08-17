@@ -97,9 +97,7 @@ export default function App() {
         </div>
 
         <p className="mb-4 leading-relaxed max-w-xl">
-          Hello, I’m Mateo, a software developer from Argentina with
-          experience in C#, SQL Server, modern web applications, React, and
-          TypeScript, as well as a strong command of Python.
+          Hello, I’m Mateo, a software developer from Argentina with experience building modern web applications using React and TypeScript, and strong proficiency in Python.
         </p>
         <p className="mb-4 leading-relaxed max-w-xl">
           Currently working on{" "}
