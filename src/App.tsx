@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 // Componentes
 import Footer from './components/Footer';
+import ProjectsButton from './components/ProjectsButton';
 import Header from './components/Header';
 
 
@@ -84,7 +85,8 @@ export default function App() {
       <Header toggleTheme={toggleTheme} theme={theme} />
 
       <main className="flex-grow flex flex-col items-center justify-center px-6 text-center">
-        <div className="flex flex-col sm:flex-row items-center sm:space-x-4 mb-6">
+        <ProjectsButton />
+        <div className="flex flex-col sm:flex-row items-center sm:space-x-4 mb-6 mt-6">
           <div className="w-20 h-20 bg-black rounded-full flex-shrink-0 flex items-center justify-center">
             <div className="w-5 h-5 bg-white rounded-full"></div>
           </div>
@@ -94,6 +96,7 @@ export default function App() {
             </h1>
             <p className="text-base sm:text-xl">Software Developer</p>
           </div>
+
         </div>
 
         <p className="mb-4 leading-relaxed max-w-xl">
