@@ -1,70 +1,79 @@
 import { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Moon, Sun, ExternalLink, Code, Database, Globe, ChevronDown, Sparkles, Zap, Target } from 'lucide-react';
+import { Github, Linkedin, Mail, Moon, Sun, ExternalLink, Code, Database, Globe, ChevronDown, Sparkles, Zap, Target, User, CheckSquare, Briefcase } from 'lucide-react';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
 
-
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setDarkMode(savedTheme === 'dark');
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // Check system preference for initial theme
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setDarkMode(true);
     }
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', darkMode);
-    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    const root = document.documentElement;
+    if (darkMode) {
+      root.classList.add('dark');
+      root.style.setProperty('--tw-bg-opacity', '1');
+      document.body.style.backgroundColor = darkMode ? '#0f172a' : '#f8fafc';
+    } else {
+      root.classList.remove('dark');
+      document.body.style.backgroundColor = '#f8fafc';
+    }
   }, [darkMode]);
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Proyectos placeholder - agrega tus links de repo aquí
   const projects = [
     {
-      title: "Proyecto Full-Stack",
-      description: "Aplicación completa con React y Node.js, base de datos PostgreSQL e integración de APIs.",
-      tech: ["React", "Node.js", "PostgreSQL", "Tailwind"],
-      repoLink: "#", // Reemplaza con tu link
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=300&fit=crop"
+      title: "My Portfolio",
+      description: "A personal portfolio website built with React and TailwindCSS to showcase my projects, skills, and experience with a clean and responsive design.",
+      tech: ["React", "TailwindCSS", "Typescript"],
+      repoLink: "https://github.com/MateoDelgadoU/Portfolio-Mateo",
+      icon: User
     },
     {
-      title: "Dashboard Analytics",
-      description: "Dashboard interactivo con visualización de datos en tiempo real usando Next.js y Python.",
-      tech: ["Next.js", "Python", "Chart.js", "API Rest"],
-      repoLink: "#", // Reemplaza con tu link
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=300&fit=crop"
+      title: "Devter",
+      description: "A productivity app for developers to organize and manage their personal projects. Built with Next.js, MongoDB, and TailwindCSS, it offers a modern UI and smooth user experience. https://devter.dev",
+      tech: ["Next.js", "MongoDB", "TailwindCSS"],
+      repoLink: "https://github.com/MateoDelgadoU/Devter",
+      icon: Briefcase
     },
     {
-      title: "E-commerce Platform",
-      description: "Plataforma de comercio electrónico con sistema de pagos y gestión de inventario.",
-      tech: ["React", "Python", "Stripe", "MongoDB"],
-      repoLink: "#", // Reemplaza con tu link
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=300&fit=crop"
+      title: "Tasker",
+      description: "A task management application designed to help users create, organize, and track their tasks. Built with React, Express, and PostgreSQL for a fast and reliable experience.",
+      tech: ["React", "Express", "PostgreSQL"],
+      repoLink: "https://github.com/MateoDelgadoU/Tasker",
+      icon: CheckSquare
     }
   ];
 
   const skills = [
-    { name: "Next.js", icon: Globe, level: 95 },
-    { name: "React", icon: Code, level: 90 },
-    { name: "Python", icon: Database, level: 85 },
-    { name: "JavaScript", icon: Zap, level: 88 },
-    { name: "Tailwind CSS", icon: Sparkles, level: 92 },
-    { name: "Node.js", icon: Target, level: 80 }
+    { name: "Next.js", icon: Globe },
+    { name: "React", icon: Code },
+    { name: "Python", icon: Database },
+    { name: "JavaScript", icon: Zap },
+    { name: "Tailwind CSS", icon: Sparkles },
+    { name: "Node.js", icon: Target }
   ];
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'dark' : ''}`}>
-      <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 text-slate-900 dark:text-slate-100">
+      <div className={`bg-gradient-to-br transition-colors duration-500 ${darkMode
+        ? 'from-slate-900 via-slate-800 to-indigo-900 text-slate-100'
+        : 'from-slate-50 via-blue-50 to-indigo-100 text-slate-900'
+        }`}>
 
         {/* Navigation */}
-        <nav className="fixed top-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-200 dark:border-slate-700">
+        <nav className={`fixed top-0 w-full backdrop-blur-md z-50 border-b transition-colors duration-500 ${darkMode
+          ? 'bg-slate-900/80 border-slate-700'
+          : 'bg-white/80 border-slate-200'
+          }`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center space-x-2">
@@ -79,16 +88,20 @@ const App = () => {
                   <button
                     key={item}
                     onClick={() => scrollToSection(item)}
-                    className="capitalize hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
+                    className={`capitalize transition-colors font-medium ${darkMode ? 'hover:text-blue-400' : 'hover:text-blue-600'
+                      }`}
                   >
-                    {item === 'home' ? 'Inicio' : item === 'about' ? 'Sobre mí' : item === 'skills' ? 'Habilidades' : item === 'projects' ? 'Proyectos' : 'Contacto'}
+                    {item === 'home' ? 'Home' : item === 'about' ? 'About' : item === 'skills' ? 'Skills' : item === 'projects' ? 'Projects' : 'Contact'}
                   </button>
                 ))}
               </div>
 
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+                className={`p-2 rounded-lg transition-colors ${darkMode
+                  ? 'bg-slate-700 hover:bg-slate-600'
+                  : 'bg-slate-200 hover:bg-slate-300'
+                  }`}
               >
                 {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
@@ -115,19 +128,23 @@ const App = () => {
                   </span>
                 </h1>
 
-                <div className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 space-y-2">
+                <div className={`text-xl md:text-2xl mb-8 space-y-2 ${darkMode ? 'text-slate-300' : 'text-slate-600'
+                  }`}>
                   <div className="flex items-center justify-center space-x-2">
                     <Code className="w-6 h-6 text-blue-500" />
-                    <span>Desarrollador de Software</span>
+                    <span>Software Developer</span>
                   </div>
                   <div className="flex items-center justify-center space-x-4 text-lg">
-                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
+                    <span className={`px-3 py-1 rounded-full ${darkMode ? 'bg-blue-900/30 text-blue-300' : 'bg-blue-100 text-blue-700'
+                      }`}>
                       Next.js
                     </span>
-                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full">
+                    <span className={`px-3 py-1 rounded-full ${darkMode ? 'bg-green-900/30 text-green-300' : 'bg-green-100 text-green-700'
+                      }`}>
                       Python
                     </span>
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">
+                    <span className={`px-3 py-1 rounded-full ${darkMode ? 'bg-purple-900/30 text-purple-300' : 'bg-purple-100 text-purple-700'
+                      }`}>
                       React
                     </span>
                   </div>
@@ -138,7 +155,8 @@ const App = () => {
                     href="https://github.com/MateoDelgadoU"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                    className={`p-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ${darkMode ? 'bg-slate-800' : 'bg-white'
+                      }`}
                   >
                     <Github className="w-6 h-6" />
                   </a>
@@ -170,47 +188,41 @@ const App = () => {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-slate-800/50">
+        <section id="about" className={`py-20 px-4 sm:px-6 lg:px-8 ${darkMode ? 'bg-slate-800/50' : 'bg-white/50'
+          }`}>
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16">
               <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Sobre Mí
+                About Me
               </span>
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="gap-12 items-center border rounded-2xl p-4">
               <div className="space-y-6">
-                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Soy un desarrollador de software apasionado por crear soluciones digitales innovadoras y eficientes.
-                  Mi enfoque está en el desarrollo full-stack, combinando tecnologías modernas para construir
-                  aplicaciones web robustas y escalables.
+                <p className={`text-lg leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'
+                  }`}>
+                  I'm a passionate software developer focused on creating innovative and efficient digital solutions.
+                  My approach centers on full-stack development, combining modern technologies to build
+                  robust and scalable web applications.
                 </p>
-                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Especializado en Next.js, React y Python, me encanta resolver problemas complejos y
-                  transformar ideas en productos digitales que generen impacto real.
+                <p className={`text-lg leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'
+                  }`}>
+                  Specialized in Next.js, React, and Python, I love solving complex problems and
+                  transforming ideas into digital products that generate real impact.
                 </p>
 
                 <div className="flex flex-wrap gap-3">
-                  {["Desarrollo Full-Stack", "UI/UX Design", "API Development", "Database Design"].map((item) => (
+                  {["Full-Stack Development", "UI/UX Design", "API Development", "Database Design"].map((item) => (
                     <span
                       key={item}
-                      className="px-4 py-2 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium"
+                      className={`px-4 py-2 bg-gradient-to-r rounded-lg text-sm font-medium ${darkMode
+                        ? 'from-blue-900/30 to-indigo-900/30 text-blue-300'
+                        : 'from-blue-100 to-indigo-100 text-blue-700'
+                        }`}
                     >
                       {item}
                     </span>
                   ))}
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="w-full h-80 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 rounded-2xl p-1">
-                  <div className="w-full h-full bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-6xl mb-4">👨‍💻</div>
-                      <div className="text-xl font-semibold">Creando el futuro</div>
-                      <div className="text-slate-600 dark:text-slate-300">línea por línea</div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -222,17 +234,18 @@ const App = () => {
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16">
               <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Habilidades
+                Skills
               </span>
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {skills.map((skill, index) => {
+              {skills.map((skill) => {
                 const IconComponent = skill.icon;
                 return (
                   <div
                     key={skill.name}
-                    className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                    className={`p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ${darkMode ? 'bg-slate-800' : 'bg-white'
+                      }`}
                   >
                     <div className="flex items-center mb-4">
                       <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg mr-4">
@@ -240,15 +253,7 @@ const App = () => {
                       </div>
                       <div>
                         <h3 className="font-bold text-lg">{skill.name}</h3>
-                        <div className="text-sm text-slate-500 dark:text-slate-400">{skill.level}% competencia</div>
                       </div>
-                    </div>
-
-                    <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
-                      <div
-                        className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full transition-all duration-1000"
-                        style={{ width: `${skill.level}%` }}
-                      />
                     </div>
                   </div>
                 );
@@ -258,58 +263,62 @@ const App = () => {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-slate-800/50">
+        <section id="projects" className={`py-20 px-4 sm:px-6 lg:px-8 ${darkMode ? 'bg-slate-800/50' : 'bg-white/50'
+          }`}>
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16">
               <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Proyectos
+                Projects
               </span>
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project, index) => (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-                >
-                  <div className="h-48 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 relative overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover mix-blend-overlay"
-                    />
-                    <div className="absolute inset-0 bg-black/20" />
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="font-bold text-xl mb-3">{project.title}</h3>
-                    <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-xs font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+              {projects.map((project, index) => {
+                const IconComponent = project.icon;
+                return (
+                  <div
+                    key={index}
+                    className={`rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ${darkMode ? 'bg-slate-800' : 'bg-white'
+                      }`}
+                  >
+                    <div className="h-48 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 relative overflow-hidden flex items-center justify-center">
+                      <IconComponent className="w-24 h-24 text-white/80" />
+                      <div className="absolute inset-0 bg-black/10" />
                     </div>
 
-                    <a
-                      href={project.repoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
-                    >
-                      <span>Ver repositorio</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
+                    <div className="p-6">
+                      <h3 className="font-bold text-xl mb-3">{project.title}</h3>
+                      <p className={`mb-4 text-sm leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'
+                        }`}>
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tech.map((tech) => (
+                          <span
+                            key={tech}
+                            className={`px-3 py-1 rounded-full text-xs font-medium ${darkMode ? 'bg-slate-700 text-slate-300' : 'bg-slate-100 text-slate-700'
+                              }`}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      <a
+                        href={project.repoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center space-x-2 font-medium transition-colors ${darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+                          }`}
+                      >
+                        <span>View Repository</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -319,32 +328,36 @@ const App = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-8">
               <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                ¿Trabajamos Juntos?
+                Let's Work Together?
               </span>
             </h2>
 
-            <p className="text-xl text-slate-600 dark:text-slate-300 mb-12 max-w-2xl mx-auto">
-              Estoy siempre abierto a nuevas oportunidades y proyectos interesantes.
-              ¡Conectemos y hagamos que las ideas cobren vida!
+            <p className={`text-xl mb-12 max-w-2xl mx-auto ${darkMode ? 'text-slate-300' : 'text-slate-600'
+              }`}>
+              I'm always open to new opportunities and interesting projects.
+              Let's connect and bring ideas to life!
             </p>
 
-            <div className="flex justify-center space-x-8">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8">
               <a
                 href="mailto:mateo350dk@gmail.com"
-                className="inline-flex items-center space-x-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-medium hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-medium hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
               >
                 <Mail className="w-5 h-5" />
-                <span>Enviar Email</span>
+                <span className="text-sm sm:text-base">Send Email</span>
               </a>
 
               <a
                 href="https://www.linkedin.com/in/mateodelgadougarte/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 px-8 py-4 rounded-xl font-medium border-2 border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                className={`w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-medium border-2 transform hover:scale-105 transition-all duration-300 shadow-lg ${darkMode
+                    ? 'bg-slate-800 text-slate-100 border-slate-700 hover:border-blue-400'
+                    : 'bg-white text-slate-900 border-slate-200 hover:border-blue-500'
+                  }`}
               >
                 <Linkedin className="w-5 h-5 text-blue-600" />
-                <span>LinkedIn</span>
+                <span className="text-sm sm:text-base">LinkedIn</span>
               </a>
             </div>
           </div>
@@ -360,13 +373,13 @@ const App = () => {
               <span className="font-bold text-lg text-white">Mateo Delgado Ugarte</span>
             </div>
             <p className="text-slate-400">
-              © 2024 Mateo Delgado Ugarte. Construido con React y mucho ☕
+              © 2025 Mateo Delgado Ugarte. Built with React and lots of tea
             </p>
           </div>
         </footer>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fade-in-up {
           from {
             opacity: 0;
@@ -384,6 +397,11 @@ const App = () => {
         
         html {
           scroll-behavior: smooth;
+        }
+        
+        /* Force Tailwind to recognize dark mode */
+        .dark {
+          color-scheme: dark;
         }
       `}</style>
     </div>
