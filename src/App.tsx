@@ -1,127 +1,393 @@
-// App.tsx
-
-//Hooks
 import { useState, useEffect } from 'react';
+import { Github, Linkedin, Mail, Moon, Sun, ExternalLink, Code, Database, Globe, ChevronDown, Sparkles, Zap, Target } from 'lucide-react';
 
-// Componentes
-import Footer from './components/Footer';
-import ProjectsButton from './components/ProjectsButton';
-import Header from './components/Header';
+const App = () => {
+  const [darkMode, setDarkMode] = useState(false);
 
 
-export const Icons = {
-  Sun: ({ className }: { className?: string }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <circle cx="12" cy="12" r="4"></circle>
-      <path d="M12 2v2"></path>
-      <path d="M12 20v2"></path>
-      <path d="M4.93 4.93l1.41 1.41"></path>
-      <path d="M17.66 17.66l1.41 1.41"></path>
-      <path d="M2 12h2"></path>
-      <path d="M20 12h2"></path>
-      <path d="M4.93 19.07l1.41-1.41"></path>
-      <path d="M17.66 6.34l1.41-1.41"></path>
-    </svg>
-  ),
-  Moon: ({ className }: { className?: string }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-    </svg>
-  ),
-  Linkedin: ({ className }: { className?: string }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-      <rect width="4" height="12" x="2" y="9"></rect>
-      <circle cx="4" cy="4" r="2"></circle>
-    </svg>
-  ),
-  Github: ({ className }: { className?: string }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.334-1.756-1.334-1.756-1.09-.744.082-.729.082-.729 1.205.084 1.838 1.238 1.838 1.238 1.07 1.834 2.806 1.304 3.49.995.108-.775.418-1.304.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.52.128-3.18 0 0 1.005-.322 3.3 1.23.957-.266 1.983-.399 3-.404 1.01.005 2.03.138 3 .404 2.28-1.552 3.285-1.23 3.285-1.23.668 1.66.264 2.877.128 3.18.77.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.624-5.475 5.92-.42.36-.795 1.12-.795 2.26 0 1.63.015 2.94.015 3.34 0 .318.21.694.825.575C20.565 22.18 24 17.683 24 12.297c0-6.627-5.373-12-12-12z"></path>
-    </svg>
-  ),
-  Mail: ({ className }: { className?: string }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-    </svg>
-  ),
-};
-
-type Theme = "light" | "dark";
-
-export default function App() {
-  const [theme, setTheme] = useState<Theme | null>(null);
-
-  // Leer tema guardado en localStorage al montar
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") as Theme | null;
-    setTheme(storedTheme ?? "dark");
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setDarkMode(savedTheme === 'dark');
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setDarkMode(true);
+    }
   }, []);
 
-  // Aplicar clase y guardar en localStorage cuando cambie
   useEffect(() => {
-    if (!theme) return;
-    document.documentElement.className = theme;
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
 
-  const toggleTheme = () => {
-    if (!theme) return;
-    setTheme(theme === "dark" ? "light" : "dark");
+  const toggleTheme = () => setDarkMode(!darkMode);
+
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Proyectos placeholder - agrega tus links de repo aquí
+  const projects = [
+    {
+      title: "Proyecto Full-Stack",
+      description: "Aplicación completa con React y Node.js, base de datos PostgreSQL e integración de APIs.",
+      tech: ["React", "Node.js", "PostgreSQL", "Tailwind"],
+      repoLink: "#", // Reemplaza con tu link
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=300&fit=crop"
+    },
+    {
+      title: "Dashboard Analytics",
+      description: "Dashboard interactivo con visualización de datos en tiempo real usando Next.js y Python.",
+      tech: ["Next.js", "Python", "Chart.js", "API Rest"],
+      repoLink: "#", // Reemplaza con tu link
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=300&fit=crop"
+    },
+    {
+      title: "E-commerce Platform",
+      description: "Plataforma de comercio electrónico con sistema de pagos y gestión de inventario.",
+      tech: ["React", "Python", "Stripe", "MongoDB"],
+      repoLink: "#", // Reemplaza con tu link
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=300&fit=crop"
+    }
+  ];
 
-  if (!theme) return null; // espera a que se cargue el tema
+  const skills = [
+    { name: "Next.js", icon: Globe, level: 95 },
+    { name: "React", icon: Code, level: 90 },
+    { name: "Python", icon: Database, level: 85 },
+    { name: "JavaScript", icon: Zap, level: 88 },
+    { name: "Tailwind CSS", icon: Sparkles, level: 92 },
+    { name: "Node.js", icon: Target, level: 80 }
+  ];
 
   return (
-    <div
-      className={`min-h-screen text-lg font-mono flex flex-col justify-between transition-colors duration-500 animate-fadeIn
-      ${theme === "dark"
-          ? "bg-[#0a0a0a] text-[#e0e0e0] bg-[radial-gradient(#ffffff0d_1px,transparent_1px)] bg-[size:10px_10px]"
-          : "bg-[#ffffff] text-[#222222] bg-[radial-gradient(#0000000d_1px,transparent_1px)] bg-[size:10px_10px]"
-        }`}
-    >
-      <Header toggleTheme={toggleTheme} theme={theme} />
+    <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'dark' : ''}`}>
+      <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 text-slate-900 dark:text-slate-100">
 
-      <main className="flex-grow flex flex-col items-center justify-center px-6 text-center">
-        <ProjectsButton />
-        <div className="flex flex-col sm:flex-row items-center sm:space-x-4 mb-6 mt-6">
-          <div className="w-20 h-20 bg-black rounded-full flex-shrink-0 flex items-center justify-center">
-            <div className="w-5 h-5 bg-white rounded-full"></div>
+        {/* Navigation */}
+        <nav className="fixed top-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-200 dark:border-slate-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              <div className="flex items-center space-x-2">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">M</span>
+                </div>
+                <span className="font-bold text-xl">Mateo Delgado</span>
+              </div>
+
+              <div className="hidden md:flex space-x-8">
+                {['home', 'about', 'skills', 'projects', 'contact'].map((item) => (
+                  <button
+                    key={item}
+                    onClick={() => scrollToSection(item)}
+                    className="capitalize hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
+                  >
+                    {item === 'home' ? 'Inicio' : item === 'about' ? 'Sobre mí' : item === 'skills' ? 'Habilidades' : item === 'projects' ? 'Proyectos' : 'Contacto'}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+              >
+                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
-          <div className="mt-4 sm:mt-0">
-            <h1 className="text-2xl sm:text-4xl font-bold mb-2">
-              Mateo Miguel Delgado Ugarte
-            </h1>
-            <p className="text-base sm:text-xl">Software Developer</p>
+        </nav>
+
+        {/* Hero Section */}
+        <section id="home" className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center">
+              <div className="animate-fade-in-up">
+                <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 p-1">
+                  <div className="w-full h-full rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                    <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                      MU
+                    </span>
+                  </div>
+                </div>
+
+                <h1 className="text-5xl md:text-7xl font-bold mb-6">
+                  <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    Mateo Delgado
+                  </span>
+                </h1>
+
+                <div className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 space-y-2">
+                  <div className="flex items-center justify-center space-x-2">
+                    <Code className="w-6 h-6 text-blue-500" />
+                    <span>Desarrollador de Software</span>
+                  </div>
+                  <div className="flex items-center justify-center space-x-4 text-lg">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
+                      Next.js
+                    </span>
+                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full">
+                      Python
+                    </span>
+                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">
+                      React
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex justify-center space-x-6 mb-12">
+                  <a
+                    href="https://github.com/MateoDelgadoU"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    <Github className="w-6 h-6" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/mateodelgadougarte/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    <Linkedin className="w-6 h-6 text-blue-600" />
+                  </a>
+                  <a
+                    href="mailto:mateo350dk@gmail.com"
+                    className="p-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    <Mail className="w-6 h-6 text-red-500" />
+                  </a>
+                </div>
+
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="animate-bounce"
+                >
+                  <ChevronDown className="w-8 h-8 text-slate-400" />
+                </button>
+              </div>
+            </div>
           </div>
+        </section>
 
-        </div>
+        {/* About Section */}
+        <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-slate-800/50">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Sobre Mí
+              </span>
+            </h2>
 
-        <p className="mb-4 leading-relaxed max-w-xl">
-          Hello, I’m Mateo, a software developer from Argentina with experience building modern web applications using React and TypeScript, and strong proficiency in Python.
-        </p>
-        <p className="mb-4 leading-relaxed max-w-xl">
-          Currently working on{" "}
-          <a
-            href="https://devter.dev"
-            target="_blank"
-            className="underline text-blue-500 dark:text-[#61dafb]"
-          >
-            Devter
-          </a>
-          , an application built with Next.js App Router as a personal project,
-          designed to organize and model projects — a tool created for
-          developers.
-        </p>
-        <p className="leading-relaxed max-w-xl">
-          Feel free to connect with me through my social networks, or check out my projects on GitHub.
-        </p>
-      </main>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Soy un desarrollador de software apasionado por crear soluciones digitales innovadoras y eficientes.
+                  Mi enfoque está en el desarrollo full-stack, combinando tecnologías modernas para construir
+                  aplicaciones web robustas y escalables.
+                </p>
+                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Especializado en Next.js, React y Python, me encanta resolver problemas complejos y
+                  transformar ideas en productos digitales que generen impacto real.
+                </p>
 
-      <Footer />
+                <div className="flex flex-wrap gap-3">
+                  {["Desarrollo Full-Stack", "UI/UX Design", "API Development", "Database Design"].map((item) => (
+                    <span
+                      key={item}
+                      className="px-4 py-2 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="w-full h-80 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 rounded-2xl p-1">
+                  <div className="w-full h-full bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-6xl mb-4">👨‍💻</div>
+                      <div className="text-xl font-semibold">Creando el futuro</div>
+                      <div className="text-slate-600 dark:text-slate-300">línea por línea</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Skills Section */}
+        <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Habilidades
+              </span>
+            </h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {skills.map((skill, index) => {
+                const IconComponent = skill.icon;
+                return (
+                  <div
+                    key={skill.name}
+                    className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    <div className="flex items-center mb-4">
+                      <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg mr-4">
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg">{skill.name}</h3>
+                        <div className="text-sm text-slate-500 dark:text-slate-400">{skill.level}% competencia</div>
+                      </div>
+                    </div>
+
+                    <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                      <div
+                        className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full transition-all duration-1000"
+                        style={{ width: `${skill.level}%` }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Projects Section */}
+        <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-slate-800/50">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Proyectos
+              </span>
+            </h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                >
+                  <div className="h-48 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 relative overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover mix-blend-overlay"
+                    />
+                    <div className="absolute inset-0 bg-black/20" />
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="font-bold text-xl mb-3">{project.title}</h3>
+                    <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm leading-relaxed">
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-xs font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <a
+                      href={project.repoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
+                    >
+                      <span>Ver repositorio</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-8">
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                ¿Trabajamos Juntos?
+              </span>
+            </h2>
+
+            <p className="text-xl text-slate-600 dark:text-slate-300 mb-12 max-w-2xl mx-auto">
+              Estoy siempre abierto a nuevas oportunidades y proyectos interesantes.
+              ¡Conectemos y hagamos que las ideas cobren vida!
+            </p>
+
+            <div className="flex justify-center space-x-8">
+              <a
+                href="mailto:mateo350dk@gmail.com"
+                className="inline-flex items-center space-x-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-medium hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <Mail className="w-5 h-5" />
+                <span>Enviar Email</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/mateodelgadougarte/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 px-8 py-4 rounded-xl font-medium border-2 border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <Linkedin className="w-5 h-5 text-blue-600" />
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900 text-slate-300">
+          <div className="max-w-7xl mx-auto text-center">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold">M</span>
+              </div>
+              <span className="font-bold text-lg text-white">Mateo Delgado Ugarte</span>
+            </div>
+            <p className="text-slate-400">
+              © 2024 Mateo Delgado Ugarte. Construido con React y mucho ☕
+            </p>
+          </div>
+        </footer>
+      </div>
+
+      <style jsx>{`
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in-up {
+          animation: fade-in-up 1s ease-out;
+        }
+        
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
     </div>
   );
-}
+};
 
+export default App;
