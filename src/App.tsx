@@ -2,21 +2,23 @@ import { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Moon, Sun, ExternalLink, Code, Database, Globe, ChevronDown, Sparkles, Zap, Target, User, CheckSquare, Briefcase } from 'lucide-react';
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    // Check system preference for initial theme
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setDarkMode(true);
+  // Inicializar desde localStorage o usar preferencia del sistema
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode');
+    if (saved !== null) {
+      return saved === 'true';
     }
-  }, []);
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
 
+  // Guardar en localStorage cada vez que cambie
   useEffect(() => {
+    localStorage.setItem('darkMode', darkMode.toString());
+
     const root = document.documentElement;
     if (darkMode) {
       root.classList.add('dark');
-      root.style.setProperty('--tw-bg-opacity', '1');
-      document.body.style.backgroundColor = darkMode ? '#0f172a' : '#f8fafc';
+      document.body.style.backgroundColor = '#0f172a';
     } else {
       root.classList.remove('dark');
       document.body.style.backgroundColor = '#f8fafc';
@@ -28,7 +30,6 @@ const App = () => {
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
-
   const projects = [
     {
       title: "My Portfolio",
@@ -197,7 +198,7 @@ const App = () => {
               </span>
             </h2>
 
-            <div className="gap-12 items-center border rounded-2xl p-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className={`text-lg leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'
                   }`}>
@@ -223,6 +224,21 @@ const App = () => {
                       {item}
                     </span>
                   ))}
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="w-full h-80 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 rounded-2xl p-1">
+                  <div className={`w-full h-full rounded-xl flex items-center justify-center ${darkMode ? 'bg-slate-800' : 'bg-white'
+                    }`}>
+                    <div className="text-center">
+                      <div className="text-6xl mb-4">👨‍💻</div>
+                      <div className={`text-xl font-semibold ${darkMode ? 'text-slate-100' : 'text-slate-900'
+                        }`}>Building the future</div>
+                      <div className={`${darkMode ? 'text-slate-300' : 'text-slate-600'
+                        }`}>line by line</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -352,8 +368,8 @@ const App = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-medium border-2 transform hover:scale-105 transition-all duration-300 shadow-lg ${darkMode
-                    ? 'bg-slate-800 text-slate-100 border-slate-700 hover:border-blue-400'
-                    : 'bg-white text-slate-900 border-slate-200 hover:border-blue-500'
+                  ? 'bg-slate-800 text-slate-100 border-slate-700 hover:border-blue-400'
+                  : 'bg-white text-slate-900 border-slate-200 hover:border-blue-500'
                   }`}
               >
                 <Linkedin className="w-5 h-5 text-blue-600" />
