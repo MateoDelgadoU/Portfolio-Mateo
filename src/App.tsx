@@ -198,7 +198,7 @@ const App = () => {
               </span>
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="border rounded-2xl p-4 gap-12 items-center">
               <div className="space-y-6">
                 <p className={`text-lg leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'
                   }`}>
@@ -224,21 +224,6 @@ const App = () => {
                       {item}
                     </span>
                   ))}
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="w-full h-80 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 rounded-2xl p-1">
-                  <div className={`w-full h-full rounded-xl flex items-center justify-center ${darkMode ? 'bg-slate-800' : 'bg-white'
-                    }`}>
-                    <div className="text-center">
-                      <div className="text-6xl mb-4">👨‍💻</div>
-                      <div className={`text-xl font-semibold ${darkMode ? 'text-slate-100' : 'text-slate-900'
-                        }`}>Building the future</div>
-                      <div className={`${darkMode ? 'text-slate-300' : 'text-slate-600'
-                        }`}>line by line</div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
