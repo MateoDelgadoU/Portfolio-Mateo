@@ -9,7 +9,7 @@ interface MainContentProps {
 }
 
 export default function MainContent({ isDark, hoveredProject, setHoveredProject }: MainContentProps) {
-    const skills = ['TypeScript', 'React', 'Node.js', 'MongoDB', 'Tailwind', 'Python'];
+    const skills = ['TypeScript', 'React', 'NextJS', 'MongoDB', 'Tailwind', 'Python'];
     return (
         <>
             {/* Main Content */}
