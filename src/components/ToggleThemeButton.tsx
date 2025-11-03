@@ -15,7 +15,7 @@ export default function ToggleThemeButton({ isDark, setIsDark }: ToggleThemeButt
                     setIsDark(newTheme);
                     localStorage.setItem("theme", newTheme ? "dark" : "light");
                 }}
-                className={`cursor-pointer absolute top-4 right-4 p-3 border ${isDark ? 'border-white/20 hover:bg-white hover:text-black' : 'border-black/20 hover:bg-black hover:text-white'} transition-all z-20 max-sm:right-2 max-sm:top-22`}
+                className={`cursor-pointer absolute top-4 right-4 p-3 border ${isDark ? 'border-white/20 hover:bg-white hover:text-black' : 'border-black/20 hover:bg-black hover:text-white'} transition-all z-20 max-sm:right-2 max-sm:top-10`}
                 aria-label="Toggle theme"
             >
                 <div className="w-5 h-5 relative">
