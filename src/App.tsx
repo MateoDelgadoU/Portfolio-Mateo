@@ -32,7 +32,7 @@ const Portfolio: React.FC = () => {
 
       {/* Footer indicator */}
       <footer
-        className={`absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs whitespace-nowrap text-center ${isDark ? 'text-white/40' : 'text-black/60'
+        className={`absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs whitespace-nowrap text-center ${isDark ? 'text-white/40' : 'text-black/70'
           } px-2`}
       >
         © 2025 – Mateo Miguel Delgado Ugarte

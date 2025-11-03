@@ -17,7 +17,7 @@ export default function MainContent({ isDark, hoveredProject, setHoveredProject 
                 {[...Array(10)].map((_, i) => (
                     <div
                         key={i}
-                        className={`absolute h-px ${isDark ? 'bg-white/10' : 'bg-black/10'} transform -rotate-45`}
+                        className={`absolute h-px ${isDark ? 'bg-white/10' : 'bg-black/30'} transform -rotate-45`}
                         style={{
                             left: `${Math.random() * 100}%`,
                             top: `${Math.random() * 100}%`,
@@ -35,7 +35,7 @@ export default function MainContent({ isDark, hoveredProject, setHoveredProject 
                 <section className="flex flex-col justify-center space-y-6 md:space-y-8 animate-fade-in">
                     <div>
                         <div className="flex items-center gap-2 mb-2">
-                            <div className={`w-12 h-px ${isDark ? 'bg-white' : 'bg-black'}`}></div>
+                            <div className={`w-12 h-px ${isDark ? 'bg-white/40' : 'bg-black/40'}`}></div>
                             <span className={`text-sm uppercase tracking-wider ${isDark ? 'text-white/60' : 'text-black/60'}`}>Full Stack Developer</span>
                         </div>
                         <h1 className="text-4xl md:text-6xl max-sm:text-2xl lg:text-7xl font-bold mb-3">
