@@ -12,6 +12,23 @@ export default function MainContent({ isDark, hoveredProject, setHoveredProject 
     const skills = ['TypeScript', 'React', 'NextJS', 'MongoDB', 'Tailwind', 'Python'];
     return (
         <>
+            {/* Background Animation */}
+            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+                {[...Array(10)].map((_, i) => (
+                    <div
+                        key={i}
+                        className={`absolute h-px ${isDark ? 'bg-white/10' : 'bg-black/10'} transform -rotate-45`}
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                            width: `${Math.random() * 200 + 100}px`,
+                            animation: `moveLines ${Math.random() * 3 + 4}s linear infinite ${Math.random() * 2}s`,
+                            transform: `scale(${Math.random() * 0.5 + 0.75})` // Added 3D effect
+                        }}
+                    />
+                ))}
+            </div>
+
             {/* Main Content */}
             <main className="max-w-6xl w-full grid md:grid-cols-2 gap-8 md:gap-12 z-10">
                 {/* Left Column */}
@@ -104,7 +121,6 @@ export default function MainContent({ isDark, hoveredProject, setHoveredProject 
                                     </div>
                                 </div>
                                 <p className={`text-xs md:text-sm ${isDark ? 'text-white/50' : 'text-black/50'}`}>{project.tech}</p>
-
                                 {/* Decorative line */}
                                 <div className={`absolute bottom-0 left-0 h-0.5 ${isDark ? 'bg-white' : 'bg-black'} transition-all duration-300 ${hoveredProject === i ? 'w-full' : 'w-0'}`}></div>
                             </a>
@@ -124,6 +140,26 @@ export default function MainContent({ isDark, hoveredProject, setHoveredProject 
                         </a>
                     </div>
                 </section>
-            </main></>
+            </main>
+
+            <style>{`
+            @keyframes moveLines {
+            0% {
+            transform: translate(-100%, -100%) rotate(-45deg);
+            opacity: 0;
+            }
+            20% {
+            opacity: 1;
+            }
+            80% {
+            opacity: 1;
+            }
+            100% {
+            transform: translate(200%, 200%) rotate(-45deg);
+            opacity: 0;
+            }
+            }
+            `}</style>
+        </>
     )
 }

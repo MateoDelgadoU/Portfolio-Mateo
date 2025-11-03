@@ -23,7 +23,6 @@ const Portfolio: React.FC = () => {
       <div className={`absolute top-0 right-0 w-32 h-32 border-r-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/20'}`}></div>
       <div className={`absolute bottom-0 left-0 w-32 h-32 border-l-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/20'}`}></div>
       <div className={`absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/20'}`}></div>
-
       <div className={`absolute top-1/3 right-10 w-20 h-px ${isDark ? 'bg-white/30' : 'bg-black/30'}`}></div>
       <div className={`absolute bottom-1/3 left-10 w-24 h-px ${isDark ? 'bg-white/30' : 'bg-black/30'}`}></div>
       <div className={`absolute top-2/3 left-1/4 w-16 h-px ${isDark ? 'bg-white/30' : 'bg-black/30'} rotate-45`}></div>
