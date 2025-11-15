@@ -5,9 +5,9 @@ export const projects = [
     github: "https://github.com/MateoDelgadoU/Portfolio-Mateo",
   },
   {
-    title: "Rick and Morty",
-    tech: "Javascript",
-    github: "https://github.com/MateoDelgadoU/Rick-MortyWebApp",
+    title: "Not-Trello (Colaborative Project)",
+    tech: "React • TypeScript • ASP.NET Core",
+    github: "https://github.com/GennNV/not-trello-frontend",
   },
   {
     title: "Devter",
