@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import ToggleThemeButton from './components/ToggleThemeButton';
+import InfoButton from './components/InfoButton';
 import MainContent from './components/MainContent';
+import AboutView from './components/AboutView';
 
 const Portfolio: React.FC = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [isDark, setIsDark] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
 
 
   useEffect(() => {
@@ -14,9 +17,13 @@ const Portfolio: React.FC = () => {
   }, [])
 
   return (
-    <div className={`h-screen w-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'} overflow-hidden relative flex items-center justify-center p-4 md:p-8 transition-colors duration-500`}>
+    <div 
+      className={`h-screen w-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'} overflow-hidden relative flex items-center justify-center p-4 md:p-8 transition-colors duration-500`}
+      role="main"
+    >
 
       <ToggleThemeButton isDark={isDark} setIsDark={setIsDark} />
+      <InfoButton isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} isDark={isDark} />
 
       {/* Decorative elements */}
       <div className={`absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
@@ -28,7 +35,11 @@ const Portfolio: React.FC = () => {
 
 
       {/* Main Content */}
-      <MainContent isDark={isDark} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject} />
+      {isInfoOpen ? (
+        <AboutView isDark={isDark} />
+      ) : (
+        <MainContent isDark={isDark} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject} />
+      )}
 
       {/* Footer indicator */}
       <footer
