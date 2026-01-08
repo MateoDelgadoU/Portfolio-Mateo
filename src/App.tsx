@@ -10,27 +10,34 @@ const Portfolio: React.FC = () => {
   const [isDark, setIsDark] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
 
+  const handleInfoToggle = (isOpen: boolean) => {
+    setIsInfoOpen(isOpen);
+    localStorage.setItem("aboutOpen", isOpen.toString());
+  };
+
 
   useEffect(() => {
     const theme = localStorage.getItem("theme")
+    const aboutOpen = localStorage.getItem("aboutOpen")
     setIsDark(theme === "dark" ? true : false)
+    setIsInfoOpen(aboutOpen === "true" ? true : false)
   }, [])
 
   return (
-    <div 
-      className={`h-screen w-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'} overflow-hidden relative flex items-center justify-center p-4 md:p-8 transition-colors duration-500`}
+    <main 
+      className={`h-screen w-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'} overflow-hidden relative flex items-center justify-center p-3 sm:p-4 md:p-8 transition-colors duration-500`}
       role="main"
     >
 
       <ToggleThemeButton isDark={isDark} setIsDark={setIsDark} />
-      <InfoButton isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} isDark={isDark} />
+      <InfoButton isInfoOpen={isInfoOpen} setIsInfoOpen={handleInfoToggle} isDark={isDark} />
 
       {/* Decorative elements */}
-      <div className={`absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
-      <div className={`absolute top-0 right-0 w-32 h-32 border-r-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
-      <div className={`absolute bottom-0 left-0 w-32 h-32 border-l-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
-      <div className={`absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
-      <div className={`absolute top-1/3 right-10 w-20 h-px ${isDark ? 'bg-white/30' : 'bg-black/40'}`}></div>
+      <div className={`absolute top-0 left-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 border-l-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
+      <div className={`absolute top-0 right-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 border-r-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
+      <div className={`absolute bottom-0 left-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 border-l-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
+      <div className={`absolute bottom-0 right-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 border-r-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
+      <div className={`absolute top-1/3 right-4 sm:right-8 md:right-10 w-12 sm:w-16 md:w-20 h-px ${isDark ? 'bg-white/30' : 'bg-black/40'}`}></div>
 
 
 
@@ -40,14 +47,6 @@ const Portfolio: React.FC = () => {
       ) : (
         <MainContent isDark={isDark} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject} />
       )}
-
-      {/* Footer indicator */}
-      <footer
-        className={`absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs whitespace-nowrap text-center ${isDark ? 'text-white/40' : 'text-black/70'
-          } px-2`}
-      >
-        © 2025 – Mateo Miguel Delgado Ugarte
-      </footer>
 
       <style>{`
         @keyframes fade-in {
@@ -80,7 +79,7 @@ const Portfolio: React.FC = () => {
           animation: fade-in-delay 0.8s ease-out 0.2s both;
         }
       `}</style>
-    </div >
+    </main >
   );
 };
 

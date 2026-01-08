@@ -36,7 +36,7 @@ export default function MainContent({ isDark, hoveredProject, setHoveredProject 
             <main className="max-w-6xl w-full grid md:grid-cols-2 gap-8 md:gap-12 z-10" role="region" aria-label="Portfolio content">
                 {/* Left Column */}
                 <section className="flex flex-col justify-center space-y-6 md:space-y-8 animate-fade-in">
-                    <div>
+                    <header>
                         <div className="flex items-center gap-2 mb-2">
                             <div className={`w-12 h-px ${isDark ? 'bg-white/40' : 'bg-black/40'}`}></div>
                             <span className={`text-sm uppercase tracking-wider ${isDark ? 'text-white/60' : 'text-black/60'}`}>Full Stack Developer</span>
@@ -47,26 +47,26 @@ export default function MainContent({ isDark, hoveredProject, setHoveredProject 
                         <p className={`text-base md:text-lg ${isDark ? 'text-white/60' : 'text-black/60'} max-w-md`}>
                             Building modern and minimalist web experiences
                         </p>
-                    </div>
+                    </header>
 
-                    <div>
+                    <section>
                         <h2 className={`text-sm uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'} mb-3`}>Skills</h2>
                         <div className="flex flex-wrap gap-2" role="list">
                             {skills.map((skill, i) => (
                                 <SkillBadge key={i} skill={skill} isDark={isDark} />
                             ))}
                         </div>
-                    </div>
+                    </section>
 
                     <ContactSection isDark={isDark} />
                 </section>
 
                 {/* Right Column - Projects */}
                 <section className="flex flex-col justify-center animate-fade-in-delay">
-                    <div className="flex items-center gap-2 mb-4 md:mb-6">
+                    <header className="flex items-center gap-2 mb-4 md:mb-6">
                         <span className={`text-sm uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>Featured Projects</span>
                         <div className={`flex-1 h-px ${isDark ? 'bg-white/20' : 'bg-black/20'}`}></div>
-                    </div>
+                    </header>
 
                     <div className="space-y-3 md:space-y-4">
                         {projects.map((project, i) => (
