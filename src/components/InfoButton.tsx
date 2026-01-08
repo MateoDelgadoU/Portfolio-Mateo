@@ -14,12 +14,12 @@ export default function InfoButton({ isInfoOpen, setIsInfoOpen, isDark }: InfoBu
       aria-label={isInfoOpen ? "Close information" : "Open information"}
       aria-expanded={isInfoOpen}
     >
-      <div className={`w-6 h-6 sm:w-5 sm:h-5 relative transition-all duration-500 ${isInfoOpen ? 'rotate-180' : 'rotate-0'}`}>
+      <div className={`w-4 h-4 sm:w-4 sm:h-4 relative transition-all duration-500 ${isInfoOpen ? 'rotate-180' : 'rotate-0'}`}>
         <span className={`absolute inset-0 flex items-center justify-center text-base sm:text-sm font-bold transition-all duration-300 ${isInfoOpen ? 'opacity-0' : 'opacity-100'}`}>
-          I
+          i
         </span>
-        <span className={`absolute inset-0 flex items-center justify-center text-lg sm:text-sm font-bold transition-all duration-300 ${isInfoOpen ? 'opacity-100' : 'opacity-0'}`}>
-          ×
+        <span className={`absolute inset-0 flex items-center justify-center  sm:text-sm font-bold transition-all duration-300 ${isInfoOpen ? 'opacity-100' : 'opacity-0'}`}>
+          X
         </span>
       </div>
     </button>

@@ -18,7 +18,7 @@ export default function ToggleThemeButton({ isDark, setIsDark }: ToggleThemeButt
                 className={`cursor-pointer absolute top-4 right-4 p-3 sm:p-3.5 border ${isDark ? 'border-white/20 hover:bg-white hover:text-black' : 'border-black/20 hover:bg-black hover:text-white'} transition-all z-20 max-sm:right-2 max-sm:top-4 sm:top-4`}
                 aria-label="Toggle theme"
             >
-                <div className="w-5 h-5 relative">
+                <div className="w-4 h-4 relative">
                     <div className={`absolute inset-0 transition-transform duration-500 ${isDark ? 'rotate-180' : 'rotate-0'}`}>
                         {isDark ? (
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
