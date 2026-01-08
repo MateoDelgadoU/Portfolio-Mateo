@@ -25,7 +25,7 @@ const Portfolio: React.FC = () => {
 
   return (
     <main 
-      className={`h-screen w-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'} overflow-hidden relative flex items-center justify-center p-3 sm:p-4 md:p-8 transition-colors duration-500`}
+      className={`h-screen w-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'} overflow-hidden relative flex items-center justify-center p-2 sm:p-3 md:p-4 lg:p-6 xl:p-8 transition-colors duration-500`}
       role="main"
     >
 
@@ -33,11 +33,11 @@ const Portfolio: React.FC = () => {
       <InfoButton isInfoOpen={isInfoOpen} setIsInfoOpen={handleInfoToggle} isDark={isDark} />
 
       {/* Decorative elements */}
-      <div className={`absolute top-0 left-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 border-l-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
-      <div className={`absolute top-0 right-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 border-r-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
-      <div className={`absolute bottom-0 left-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 border-l-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
-      <div className={`absolute bottom-0 right-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 border-r-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
-      <div className={`absolute top-1/3 right-4 sm:right-8 md:right-10 w-12 sm:w-16 md:w-20 h-px ${isDark ? 'bg-white/30' : 'bg-black/40'}`}></div>
+      <div className={`absolute top-0 left-0 w-8 sm:w-12 md:w-16 lg:w-24 xl:w-32 h-8 sm:h-12 md:h-16 lg:h-24 xl:h-32 border-l-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
+      <div className={`absolute top-0 right-0 w-8 sm:w-12 md:w-16 lg:w-24 xl:w-32 h-8 sm:h-12 md:h-16 lg:h-24 xl:h-32 border-r-2 border-t-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
+      <div className={`absolute bottom-0 left-0 w-8 sm:w-12 md:w-16 lg:w-24 xl:w-32 h-8 sm:h-12 md:h-16 lg:h-24 xl:h-32 border-l-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
+      <div className={`absolute bottom-0 right-0 w-8 sm:w-12 md:w-16 lg:w-24 xl:w-32 h-8 sm:h-12 md:h-16 lg:h-24 xl:h-32 border-r-2 border-b-2 ${isDark ? 'border-white/20' : 'border-black/40'}`}></div>
+      <div className={`absolute top-1/3 right-2 sm:right-3 md:right-4 lg:right-8 xl:right-10 w-8 sm:w-10 md:w-12 lg:w-16 xl:w-20 h-px ${isDark ? 'bg-white/30' : 'bg-black/40'}`}></div>
 
 
 

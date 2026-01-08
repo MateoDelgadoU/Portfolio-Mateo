@@ -15,10 +15,10 @@ export default function ToggleThemeButton({ isDark, setIsDark }: ToggleThemeButt
                     setIsDark(newTheme);
                     localStorage.setItem("theme", newTheme ? "dark" : "light");
                 }}
-                className={`cursor-pointer absolute top-4 right-4 p-3 sm:p-3.5 border ${isDark ? 'border-white/20 hover:bg-white hover:text-black' : 'border-black/20 hover:bg-black hover:text-white'} transition-all z-20 max-sm:right-2 max-sm:top-4 sm:top-4`}
+                className={`cursor-pointer absolute top-2 right-2 sm:top-4 sm:right-4 p-2 sm:p-2.5 md:p-3 border ${isDark ? 'border-white/20 hover:bg-white hover:text-black' : 'border-black/20 hover:bg-black hover:text-white'} transition-all z-20`}
                 aria-label="Toggle theme"
             >
-                <div className="w-4 h-4 relative">
+                <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 relative">
                     <div className={`absolute inset-0 transition-transform duration-500 ${isDark ? 'rotate-180' : 'rotate-0'}`}>
                         {isDark ? (
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

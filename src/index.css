@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+/* Responsive font scaling for very small screens */
+@media (max-width: 380px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 320px) {
+  html {
+    font-size: 12px;
+  }
+}
