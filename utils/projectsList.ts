@@ -1,8 +1,8 @@
 export const projects = [
   {
-    title: "Portfolio",
-    tech: "React • TypeScript",
-    github: "https://github.com/MateoDelgadoU/Portfolio-Mateo",
+    title: "Standard Model",
+    tech: "React • TypeScript • Tailwind CSS",
+    github: "https://standard-model.vercel.app/",
   },
   {
     title: "Not-Trello (Colaborative Project)",
